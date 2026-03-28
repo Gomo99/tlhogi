@@ -1,0 +1,445 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Hlogiey' — Delicious Noodles, Endless Flavours!</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue-deep: #0a3d8f;
+    --blue-mid: #1565c0;
+    --blue-light: #42a5f5;
+    --sky: #e3f2fd;
+    --green: #2e7d32;
+    --green-light: #4caf50;
+    --yellow: #fdd835;
+    --yellow-dark: #f9a825;
+    --red: #c62828;
+    --white: #ffffff;
+    --text-dark: #1a1a2e;
+    --cream: #fffde7;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Nunito', sans-serif; background: var(--sky); color: var(--text-dark); overflow-x: hidden; }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 1000; opacity: .4;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(160deg, var(--blue-deep) 0%, var(--blue-mid) 50%, var(--blue-light) 100%);
+    position: relative; overflow: hidden; padding: 0 0 60px; text-align: center;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 80px;
+    background: var(--sky); clip-path: ellipse(55% 100% at 50% 100%);
+  }
+
+  .blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .18; animation: float 8s ease-in-out infinite; }
+  .blob-1 { width:380px;height:380px;background:var(--blue-light);top:-100px;left:-80px;animation-delay:0s; }
+  .blob-2 { width:300px;height:300px;background:var(--yellow);top:60px;right:-60px;animation-delay:3s; }
+  .blob-3 { width:200px;height:200px;background:var(--green-light);bottom:60px;left:40%;animation-delay:5s; }
+  @keyframes float { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-24px) scale(1.06); } }
+
+  nav { display:flex;justify-content:space-between;align-items:center;padding:18px 32px;position:relative;z-index:10; }
+  .nav-logo { font-family:'Fredoka One',cursive;font-size:1.9rem;color:var(--white);text-shadow:3px 3px 0 rgba(0,0,0,.25);letter-spacing:1px; }
+  .nav-logo span { color:var(--yellow); }
+  .nav-links { display:flex;gap:28px;list-style:none; }
+  .nav-links a { color:rgba(255,255,255,.85);text-decoration:none;font-weight:700;font-size:.95rem;letter-spacing:.5px;transition:color .2s; }
+  .nav-links a:hover { color:var(--yellow); }
+  .nav-cta { background:var(--yellow);color:var(--blue-deep)!important;padding:8px 20px;border-radius:50px;box-shadow:0 4px 12px rgba(0,0,0,.25);transition:transform .2s,box-shadow .2s!important; }
+  .nav-cta:hover { transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.3)!important; }
+
+  .hero-content { position:relative;z-index:5;padding:30px 20px 100px; }
+  .hero-title { font-family:'Fredoka One',cursive;font-size:clamp(4rem,13vw,8rem);color:var(--white);text-shadow:4px 4px 0 rgba(0,0,0,.3),0 0 40px rgba(255,255,255,.2);line-height:1;letter-spacing:2px;animation:popIn .7s cubic-bezier(.34,1.56,.64,1) both; }
+  @keyframes popIn { from{opacity:0;transform:scale(.7) translateY(30px);} to{opacity:1;transform:scale(1) translateY(0);} }
+  .hero-tagline { display:inline-block;background:linear-gradient(135deg,var(--green) 0%,var(--green-light) 100%);color:var(--white);font-size:clamp(1rem,3vw,1.4rem);font-weight:800;font-style:italic;padding:10px 36px;border-radius:50px;margin:18px 0 0;border:3px solid var(--yellow);box-shadow:0 6px 20px rgba(0,0,0,.25);animation:popIn .7s .2s cubic-bezier(.34,1.56,.64,1) both;letter-spacing:.5px; }
+
+  /* SECTIONS */
+  .section { padding:70px 20px;position:relative; }
+  .section-title { font-family:'Fredoka One',cursive;font-size:clamp(2rem,6vw,3.2rem);color:var(--blue-deep);text-align:center;margin-bottom:10px;letter-spacing:1px; }
+  .section-title span { color:var(--green); }
+  .section-sub { text-align:center;color:#555;font-size:1.05rem;font-weight:600;margin-bottom:48px; }
+
+  /* FLAVOURS */
+  .flavours-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;max-width:960px;margin:0 auto; }
+  .flavour-card { border-radius:24px;padding:28px 20px 22px;text-align:center;cursor:pointer;position:relative;overflow:hidden;transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;box-shadow:0 8px 24px rgba(0,0,0,.12); }
+  .flavour-card:hover { transform:translateY(-10px) rotate(-1deg) scale(1.03);box-shadow:0 20px 40px rgba(0,0,0,.18); }
+  .flavour-card::before { content:'';position:absolute;inset:0;background:rgba(255,255,255,.08);border-radius:24px; }
+  .flavour-card.veg    { background:linear-gradient(145deg,#2e7d32,#66bb6a); }
+  .flavour-card.beef   { background:linear-gradient(145deg,#b71c1c,#ef5350); }
+  .flavour-card.cheese { background:linear-gradient(145deg,#f57f17,#ffd54f); }
+  .flavour-card.curry  { background:linear-gradient(145deg,#795548,#bcaaa4); }
+  .flavour-card.peri   { background:linear-gradient(145deg,#e64a19,#ff8a65); }
+  .flavour-card.steak  { background:linear-gradient(145deg,#4e342e,#a1887f); }
+  .flavour-emoji { font-size:3rem;margin-bottom:8px;display:block; }
+  .flavour-name { font-family:'Fredoka One',cursive;font-size:1.25rem;color:var(--white);text-shadow:1px 2px 4px rgba(0,0,0,.3);letter-spacing:.5px; }
+  .flavour-badge { display:inline-block;background:rgba(255,255,255,.25);color:var(--white);font-size:.78rem;font-weight:700;padding:3px 12px;border-radius:50px;margin-top:8px;border:1.5px solid rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.5px; }
+
+  /* PRICING */
+  .pricing-section { background:linear-gradient(135deg,var(--blue-deep) 0%,#1a237e 100%);position:relative;overflow:hidden; }
+  .pricing-section::before { content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(255,255,255,.03) 40px,rgba(255,255,255,.03) 80px); }
+  .pricing-section .section-title { color:var(--yellow); }
+  .pricing-section .section-sub { color:rgba(255,255,255,.7); }
+  .price-cards { display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;max-width:900px;margin:0 auto; }
+  .price-card { background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.15);border-radius:24px;padding:32px 24px;text-align:center;backdrop-filter:blur(10px);transition:transform .3s,background .3s,border-color .3s;position:relative;overflow:hidden; }
+  .price-card:hover { transform:translateY(-8px);background:rgba(255,255,255,.12);border-color:var(--yellow); }
+  .price-card.featured { background:var(--yellow);border-color:var(--yellow);transform:scale(1.05); }
+  .price-card.featured:hover { transform:scale(1.05) translateY(-8px); }
+  .price-card.featured .price-label,.price-card.featured .price-qty { color:var(--blue-deep); }
+  .price-card.featured .price-amount { color:var(--blue-deep); }
+  .price-card.featured .price-save { background:var(--blue-deep); color:var(--white); }
+  .price-icon { font-size:2.4rem;margin-bottom:12px;display:block; }
+  .price-label { font-family:'Fredoka One',cursive;font-size:1.35rem;color:var(--white);letter-spacing:.5px; }
+  .price-qty { font-size:.9rem;font-weight:700;color:rgba(255,255,255,.65);margin:4px 0 14px; }
+  .price-amount { font-family:'Fredoka One',cursive;font-size:3rem;color:var(--yellow);line-height:1; }
+  .price-amount small { font-size:1.2rem;vertical-align:super; }
+  .price-save { display:inline-block;background:var(--green-light);color:var(--white);font-size:.75rem;font-weight:800;padding:3px 12px;border-radius:50px;margin-top:10px;text-transform:uppercase;letter-spacing:.5px; }
+
+  /* DELIVERY */
+  .delivery-section { background:var(--cream); }
+  .delivery-cards { display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;max-width:760px;margin:0 auto; }
+  .delivery-card { background:var(--white);border-radius:24px;padding:34px 28px;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,.08);border:2px solid transparent;transition:border-color .3s,transform .3s; }
+  .delivery-card:hover { border-color:var(--blue-mid);transform:translateY(-6px); }
+  .delivery-icon { font-size:3rem;margin-bottom:12px;display:block; }
+  .delivery-title { font-family:'Fredoka One',cursive;font-size:1.3rem;color:var(--blue-deep);margin-bottom:8px; }
+  .delivery-desc { color:#666;font-size:.95rem;font-weight:600;line-height:1.5; }
+  .delivery-price { display:inline-block;background:var(--blue-mid);color:var(--white);font-family:'Fredoka One',cursive;font-size:1.5rem;padding:6px 22px;border-radius:50px;margin-top:14px;box-shadow:0 4px 12px rgba(21,101,192,.35); }
+
+  /* ORDER SECTION */
+  .order-section { background:linear-gradient(135deg,var(--green) 0%,#1b5e20 100%);text-align:center;position:relative;overflow:hidden; }
+  .order-section::before { content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(255,255,255,.1) 0%,transparent 70%); }
+  .order-section .section-title { color:var(--yellow); }
+  .order-section .section-sub { color:rgba(255,255,255,.8); }
+  .phone-number { font-family:'Fredoka One',cursive;font-size:clamp(2rem,8vw,4.5rem);color:var(--white);text-shadow:3px 3px 0 rgba(0,0,0,.25);letter-spacing:2px;animation:pulse 2.5s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.04);} }
+  .wa-badge { display:inline-flex;align-items:center;gap:12px;background:#25d366;color:var(--white);font-size:1.2rem;font-weight:800;padding:14px 36px;border-radius:60px;margin:20px 10px 0;box-shadow:0 8px 24px rgba(0,0,0,.25);text-decoration:none;transition:transform .25s,box-shadow .25s;letter-spacing:.5px; }
+  .wa-badge:hover { transform:translateY(-4px) scale(1.04);box-shadow:0 14px 32px rgba(0,0,0,.3); }
+  .call-badge { display:inline-flex;align-items:center;gap:12px;background:var(--yellow);color:var(--blue-deep);font-size:1.2rem;font-weight:800;padding:14px 36px;border-radius:60px;margin:20px 10px 0;box-shadow:0 8px 24px rgba(0,0,0,.25);text-decoration:none;transition:transform .25s,box-shadow .25s;letter-spacing:.5px; }
+  .call-badge:hover { transform:translateY(-4px) scale(1.04);box-shadow:0 14px 32px rgba(0,0,0,.3); }
+
+  /* MODAL */
+  .modal-overlay { display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:999;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px); }
+  .modal-overlay.active { display:flex; }
+  .modal { background:var(--white);border-radius:28px;padding:40px 32px;max-width:480px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:modalIn .4s cubic-bezier(.34,1.56,.64,1) both;box-shadow:0 30px 80px rgba(0,0,0,.35); }
+  @keyframes modalIn { from{opacity:0;transform:scale(.85) translateY(30px);} to{opacity:1;transform:scale(1) translateY(0);} }
+  .modal-close { position:absolute;top:18px;right:18px;background:var(--sky);border:none;width:36px;height:36px;border-radius:50%;font-size:1.2rem;cursor:pointer;color:var(--blue-deep);font-weight:900;display:flex;align-items:center;justify-content:center;transition:background .2s; }
+  .modal-close:hover { background:#bbdefb; }
+  .modal h2 { font-family:'Fredoka One',cursive;font-size:2rem;color:var(--blue-deep);margin-bottom:24px;text-align:center; }
+  .form-group { margin-bottom:18px; }
+  .form-group label { display:block;font-weight:800;font-size:.9rem;color:#444;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px; }
+  .form-group select,.form-group input,.form-group textarea { width:100%;padding:12px 16px;border:2px solid #e0e0e0;border-radius:14px;font-family:'Nunito',sans-serif;font-size:1rem;font-weight:600;outline:none;transition:border-color .2s;background:var(--sky);color:var(--text-dark); }
+  .form-group select:focus,.form-group input:focus,.form-group textarea:focus { border-color:var(--blue-mid);background:var(--white); }
+  .form-group textarea { resize:vertical;min-height:90px; }
+  .order-summary { background:var(--sky);border-radius:14px;padding:16px 18px;margin:20px 0;font-weight:700;font-size:1rem;color:var(--blue-deep);border:2px dashed var(--blue-light); }
+  .order-summary .total { font-family:'Fredoka One',cursive;font-size:1.5rem;color:var(--green);margin-top:6px; }
+  .btn-submit { width:100%;background:linear-gradient(135deg,var(--green) 0%,var(--green-light) 100%);color:var(--white);border:none;padding:16px;border-radius:50px;font-family:'Fredoka One',cursive;font-size:1.4rem;cursor:pointer;letter-spacing:1px;box-shadow:0 6px 20px rgba(46,125,50,.4);transition:transform .25s,box-shadow .25s; }
+  .btn-submit:hover { transform:translateY(-3px);box-shadow:0 10px 28px rgba(46,125,50,.5); }
+
+  /* FOOTER */
+  footer { background:var(--blue-deep);color:rgba(255,255,255,.7);text-align:center;padding:28px 20px;font-size:.9rem;font-weight:600; }
+  footer strong { color:var(--yellow);font-family:'Fredoka One',cursive;font-size:1.1rem;letter-spacing:1px; }
+
+  /* SCROLL REVEAL */
+  .reveal { opacity:0;transform:translateY(40px);transition:opacity .6s ease,transform .6s ease; }
+  .reveal.visible { opacity:1;transform:translateY(0); }
+
+  /* TICKER */
+  .ticker-wrap { background:var(--yellow);overflow:hidden;padding:10px 0;white-space:nowrap;position:relative;z-index:10; }
+  .ticker { display:inline-block;animation:ticker 25s linear infinite;font-family:'Fredoka One',cursive;font-size:1rem;color:var(--blue-deep);letter-spacing:1px; }
+  @keyframes ticker { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+  /* HAMBURGER */
+  .hamburger { display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;z-index:200;background:rgba(255,255,255,.15);border:none;border-radius:10px;transition:background .2s; }
+  .hamburger:hover { background:rgba(255,255,255,.25); }
+  .hamburger span { display:block;width:24px;height:2.5px;background:var(--white);border-radius:4px;transition:transform .35s cubic-bezier(.34,1.56,.64,1),opacity .25s; }
+  .hamburger.open span:nth-child(1) { transform:translateY(7.5px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity:0;transform:scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform:translateY(-7.5px) rotate(-45deg); }
+
+  /* MOBILE DRAWER */
+  .mobile-menu { display:none;position:fixed;top:0;right:0;bottom:0;width:min(280px,80vw);background:var(--blue-deep);z-index:500;flex-direction:column;padding:90px 32px 40px;gap:6px;box-shadow:-8px 0 40px rgba(0,0,0,.35);transform:translateX(100%);transition:transform .4s cubic-bezier(.34,1.56,.64,1); }
+  .mobile-menu.open { transform:translateX(0); }
+  .mobile-menu a { color:rgba(255,255,255,.85);text-decoration:none;font-weight:800;font-size:1.2rem;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:10px;transition:color .2s,padding-left .2s; }
+  .mobile-menu a:hover { color:var(--yellow);padding-left:8px; }
+  .mobile-menu a.mob-cta { background:var(--yellow);color:var(--blue-deep)!important;padding:14px 24px;border-radius:50px;border:none;margin-top:16px;text-align:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.25); }
+  .mobile-menu a.mob-cta:hover { padding-left:0;transform:translateY(-2px); }
+  .menu-backdrop { display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:450;backdrop-filter:blur(3px);opacity:0;transition:opacity .3s; }
+  .menu-backdrop.open { opacity:1; }
+
+  /* STICKY ORDER BAR */
+  .sticky-bar { position:fixed;bottom:0;left:0;right:0;background:var(--blue-deep);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;z-index:400;transform:translateY(100%);transition:transform .4s cubic-bezier(.34,1.56,.64,1);box-shadow:0 -4px 24px rgba(0,0,0,.3);border-top:3px solid var(--yellow); }
+  .sticky-bar.visible { transform:translateY(0); }
+  .sticky-bar-text { color:var(--white);font-weight:800;font-size:.95rem;line-height:1.3; }
+  .sticky-bar-text span { color:var(--yellow);font-family:'Fredoka One',cursive;font-size:1.05rem; }
+  .sticky-bar-btns { display:flex;gap:10px;flex-shrink:0; }
+  .sticky-btn { padding:10px 20px;border-radius:50px;font-weight:800;font-size:.9rem;cursor:pointer;border:none;transition:transform .2s,box-shadow .2s;text-decoration:none;display:inline-flex;align-items:center;gap:6px;white-space:nowrap; }
+  .sticky-btn-wa { background:#25d366;color:var(--white);box-shadow:0 4px 12px rgba(0,0,0,.2); }
+  .sticky-btn-order { background:var(--yellow);color:var(--blue-deep);box-shadow:0 4px 12px rgba(0,0,0,.2); }
+  .sticky-btn:hover { transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.3); }
+
+  /* FLOATING WHATSAPP */
+  .float-wa {
+    position:fixed;
+    bottom:90px;
+    right:20px;
+    background:#25d366;
+    color:white;
+    padding:14px 16px;
+    border-radius:50%;
+    font-size:22px;
+    box-shadow:0 6px 18px rgba(0,0,0,.3);
+    z-index:999;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:transform .2s,box-shadow .2s;
+  }
+  .float-wa:hover { transform:scale(1.08); box-shadow:0 12px 24px rgba(0,0,0,.4); }
+
+  @media(max-width:640px) {
+    .nav-links { display:none; }
+    .hamburger { display:flex; }
+    .mobile-menu { display:flex; }
+    .menu-backdrop { display:block; }
+    .price-cards { grid-template-columns:1fr 1fr; }
+    .price-card.featured { transform:none; }
+    .price-card.featured:hover { transform:translateY(-8px); }
+    .sticky-bar-text { font-size:.82rem; }
+    .sticky-btn { padding:9px 14px;font-size:.82rem; }
+    .float-wa { bottom:85px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <nav>
+    <div class="nav-logo">Hlogiey<span>'</span></div>
+    <ul class="nav-links">
+      <li><a href="#flavours">Flavours</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#delivery">Delivery</a></li>
+      <li><a href="#order" class="nav-cta">Order Now</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="menu-backdrop" id="menuBackdrop" onclick="closeMenu()"></div>
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="#flavours" onclick="closeMenu()">🍜 Flavours</a>
+    <a href="#pricing" onclick="closeMenu()">💰 Pricing</a>
+    <a href="#delivery" onclick="closeMenu()">🚚 Delivery</a>
+    <a href="#order" class="mob-cta" onclick="closeMenu()">🛒 Order Now</a>
+  </nav>
+  <div class="hero-content">
+    <h1 class="hero-title">HLOGIEY'</h1>
+    <div class="hero-tagline">🍜 Delicious Noodles, Endless Flavours!</div>
+  </div>
+</section>
+
+<div class="ticker-wrap">
+  <div class="ticker">
+    🍜 VEGETABLE &nbsp;•&nbsp; 🥩 BEEF &nbsp;•&nbsp; 🧀 CHEESE &nbsp;•&nbsp; 🌶️ PERI PERI LAMB &nbsp;•&nbsp; 🥩 STEAK CHOPS &nbsp;•&nbsp; 🍛 CURRY &nbsp;•&nbsp; ORDER NOW: 0810 389 139 &nbsp;•&nbsp; 🍜 VEGETABLE &nbsp;•&nbsp; 🥩 BEEF &nbsp;•&nbsp; 🧀 CHEESE &nbsp;•&nbsp; 🌶️ PERI PERI LAMB &nbsp;•&nbsp; 🥩 STEAK CHOPS &nbsp;•&nbsp; 🍛 CURRY &nbsp;•&nbsp; ORDER NOW: 0810 389 139 &nbsp;•&nbsp;
+  </div>
+</div>
+
+<section class="section" id="flavours">
+  <h2 class="section-title reveal">Our <span>Flavours</span></h2>
+  <p class="section-sub reveal">GOLF Instant Noodles — ready in 3 minutes!</p>
+  <div class="flavours-grid">
+    <div class="flavour-card veg reveal"><span class="flavour-emoji">🥦</span><div class="flavour-name">Vegetable</div><span class="flavour-badge">Light & Fresh</span></div>
+    <div class="flavour-card beef reveal"><span class="flavour-emoji">🥩</span><div class="flavour-name">Beef</div><span class="flavour-badge">Classic Fav</span></div>
+    <div class="flavour-card cheese reveal"><span class="flavour-emoji">🧀</span><div class="flavour-name">Cheese</div><span class="flavour-badge">Creamy</span></div>
+    <div class="flavour-card curry reveal"><span class="flavour-emoji">🍛</span><div class="flavour-name">Curry</div><span class="flavour-badge">Spiced Up</span></div>
+    <div class="flavour-card peri reveal"><span class="flavour-emoji">🌶️</span><div class="flavour-name">Peri Peri Lamb</div><span class="flavour-badge">Hot & Bold</span></div>
+    <div class="flavour-card steak reveal"><span class="flavour-emoji">🍖</span><div class="flavour-name">Steak Chops</div><span class="flavour-badge">Rich & Smoky</span></div>
+  </div>
+</section>
+
+<section class="section pricing-section" id="pricing">
+  <h2 class="section-title reveal">💰 Price <span style="color:var(--white)">List</span></h2>
+  <p class="section-sub reveal">Wholesale pricing — the more you buy, the more you save!</p>
+  <div class="price-cards">
+    <div class="price-card reveal"><span class="price-icon">🛍️</span><div class="price-label">1 Packet</div><div class="price-qty">Single pack</div><div class="price-amount"><small>R</small>7</div></div>
+    <div class="price-card reveal"><span class="price-icon">📦</span><div class="price-label">5 Pack</div><div class="price-qty">5 packets</div><div class="price-amount"><small>R</small>30</div><span class="price-save">Save R5</span></div>
+    <div class="price-card featured reveal"><span class="price-icon">🎁</span><div class="price-label">Half Box</div><div class="price-qty">25 packets</div><div class="price-amount"><small>R</small>150</div><span class="price-save">🔥 Most Popular</span></div>
+    <div class="price-card reveal"><span class="price-icon">🏭</span><div class="price-label">Full Box</div><div class="price-qty">50 packets</div><div class="price-amount"><small>R</small>250</div><span class="price-save">Bulk Deal!</span></div>
+  </div>
+</section>
+
+<section class="section delivery-section" id="delivery">
+  <h2 class="section-title reveal">🚚 Delivery <span>Info</span></h2>
+  <p class="section-sub reveal">We bring the noodles to you!</p>
+  <div class="delivery-cards">
+    <div class="delivery-card reveal"><span class="delivery-icon">🏘️</span><div class="delivery-title">In-Town (Modimolle)</div><div class="delivery-desc">Fast local delivery within Modimolle. Order and we'll drop it off at your door!</div><div class="delivery-price">R20</div></div>
+    <div class="delivery-card reveal"><span class="delivery-icon">🚀</span><div class="delivery-title">Outside Modimolle</div><div class="delivery-desc">We use <strong>Courier Guy</strong> for nationwide delivery. Fast & reliable!</div><div class="delivery-price">Courier Guy</div></div>
+  </div>
+</section>
+
+<section class="section order-section" id="order">
+  <h2 class="section-title reveal">📞 Place an Order!</h2>
+  <p class="section-sub reveal">Call or WhatsApp us — we're ready to serve you!</p>
+  <div class="phone-number reveal">0810 389 139</div>
+  <br>
+  <a href="https://wa.me/27810389139" class="wa-badge reveal" target="_blank">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    WhatsApp Us
+  </a>
+  <a href="tel:+27810389139" class="call-badge reveal">📞 Call Now</a>
+  <br><br>
+  <button class="call-badge reveal" style="border:none;cursor:pointer;font-family:'Nunito',sans-serif;" onclick="openModal()">🛒 Build My Order</button>
+</section>
+
+<!-- STICKY ORDER BAR -->
+<div class="sticky-bar" id="stickyBar">
+  <div class="sticky-bar-text"><span>Hlogiey' Noodles</span><br>From R7 a packet • Delivery available</div>
+  <div class="sticky-bar-btns">
+    <a href="https://wa.me/27810389139" class="sticky-btn sticky-btn-wa" target="_blank">💬 WhatsApp</a>
+    <button class="sticky-btn sticky-btn-order" onclick="openModal()">🛒 Order</button>
+  </div>
+</div>
+
+<!-- FLOATING WHATSAPP BUTTON -->
+<a href="https://wa.me/27810389139" target="_blank" class="float-wa">💬</a>
+
+<footer><strong>HLOGIEY'</strong><br><span>Delicious Noodles, Endless Flavours!</span><br><br>© 2025 Hlogiey. All rights reserved.</footer>
+
+<!-- ORDER MODAL -->
+<div class="modal-overlay" id="orderModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h2>🛒 Place Your Order</h2>
+    <div class="form-group"><label>Your Name *</label><input type="text" id="custName" placeholder="e.g. Thabo Molefe"></div>
+    <div class="form-group"><label>Phone / WhatsApp *</label><input type="tel" id="custPhone" placeholder="e.g. 082 123 4567"></div>
+    <div class="form-group"><label>Pack Size</label><select id="packSize" onchange="calcTotal()"><option value="7,1">1 Packet — R7</option><option value="30,5">5 Pack — R30</option><option value="150,25">Half Box (25) — R150</option><option value="250,50">Full Box (50) — R250</option></select></div>
+    <div class="form-group"><label>Quantity</label><input type="number" id="qty" min="1" value="1" oninput="calcTotal()"></div>
+    <div class="form-group"><label>Flavour Preference</label><select id="flavour"><option value="Mixed">Mixed Flavours (all)</option><option value="Vegetable">Vegetable Only</option><option value="Beef">Beef Only</option><option value="Cheese">Cheese Only</option><option value="Curry">Curry Only</option><option value="Peri Peri Lamb">Peri Peri Lamb Only</option><option value="Steak Chops">Steak Chops Only</option></select></div>
+    <div class="form-group"><label>Delivery</label><select id="delivery" onchange="calcTotal()"><option value="0">🏘️ Collect (No charge)</option><option value="20">🚗 In-town Modimolle — R20</option><option value="0">📦 Outside Modimolle — Courier Guy (quoted)</option></select></div>
+    <div class="form-group"><label>Address / Notes</label><textarea id="notes" placeholder="Your address or any special requests..."></textarea></div>
+    <div class="order-summary" id="orderSummary"><div>1× 1 Packet (Mixed Flavours)</div><div class="total">Total: R7</div></div>
+    <button class="btn-submit" id="submitOrderBtn" onclick="sendOrder()">📲 Send via WhatsApp</button>
+  </div>
+</div>
+
+<script>
+  // MENU
+  function toggleMenu() { const hb = document.getElementById('hamburger'); const menu = document.getElementById('mobileMenu'); const backdrop = document.getElementById('menuBackdrop'); const open = menu.classList.toggle('open'); hb.classList.toggle('open', open); backdrop.classList.toggle('open', open); document.body.style.overflow = open ? 'hidden' : ''; }
+  function closeMenu() { document.getElementById('hamburger').classList.remove('open'); document.getElementById('mobileMenu').classList.remove('open'); document.getElementById('menuBackdrop').classList.remove('open'); document.body.style.overflow = ''; }
+
+  // STICKY BAR
+  const stickyBar = document.getElementById('stickyBar'); const heroEl = document.querySelector('.hero');
+  window.addEventListener('scroll', () => { const heroBottom = heroEl.getBoundingClientRect().bottom; stickyBar.classList.toggle('visible', heroBottom < 0); }, { passive: true });
+
+  // REVEAL
+  const observer = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+
+  // MODAL
+  function openModal() { document.getElementById('orderModal').classList.add('active'); document.body.style.overflow = 'hidden'; calcTotal(); }
+  function closeModal() { document.getElementById('orderModal').classList.remove('active'); document.body.style.overflow = ''; }
+
+  // SMART DELIVERY AUTO-DETECTION (on notes change)
+  function autoDetectDelivery() {
+    const notes = document.getElementById('notes').value.toLowerCase();
+    const deliverySelect = document.getElementById('delivery');
+    if (notes.includes("street") || notes.includes("house") || notes.includes("avenue") || notes.includes("road") || notes.includes("modimolle")) {
+      if (deliverySelect.options.length >= 2 && deliverySelect.options[1] && deliverySelect.options[1].value === "20") {
+        deliverySelect.value = "20";
+        calcTotal();
+      }
+    } else if (notes.includes("outside") || notes.includes("town") || notes.includes("courier")) {
+      // keep as is, but optionally keep default collect
+    }
+  }
+  document.getElementById('notes').addEventListener('input', autoDetectDelivery);
+
+  // CALC TOTAL
+  function calcTotal() {
+    const [price, packetsPer] = document.getElementById('packSize').value.split(',').map(Number);
+    const qty = Math.max(1, parseInt(document.getElementById('qty').value) || 1);
+    const deliveryEl = document.getElementById('delivery');
+    const deliveryFee = parseInt(deliveryEl.value) || 0;
+    const flavour = document.getElementById('flavour').value;
+    const sizeLabel = document.getElementById('packSize').options[document.getElementById('packSize').selectedIndex].text;
+    const total = (price * qty) + deliveryFee;
+    const totalPackets = packetsPer * qty;
+    document.getElementById('orderSummary').innerHTML = `
+      <div>${qty}× ${sizeLabel} = ${totalPackets} packets</div>
+      <div style="font-size:.9rem;color:#555;margin-top:4px">Flavour: ${flavour}</div>
+      ${deliveryFee > 0 ? `<div style="font-size:.9rem;color:#555">Delivery: R${deliveryFee}</div>` : ''}
+      <div class="total">Total: R${total}</div>`;
+  }
+
+  // VALIDATION + LOADING + WHATSAPP
+  async function sendOrder() {
+    const name = document.getElementById('custName').value.trim();
+    const phone = document.getElementById('custPhone').value.trim();
+    if (!name || !phone) {
+      alert("⚠️ Please enter your name and phone number");
+      return;
+    }
+    const btn = document.getElementById('submitOrderBtn');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = "⏳ Processing...";
+    btn.disabled = true;
+
+    setTimeout(() => {
+      const [price, packetsPer] = document.getElementById('packSize').value.split(',').map(Number);
+      const qty = Math.max(1, parseInt(document.getElementById('qty').value) || 1);
+      const sizeLabel = document.getElementById('packSize').options[document.getElementById('packSize').selectedIndex].text;
+      const flavour = document.getElementById('flavour').value;
+      const deliveryEl = document.getElementById('delivery');
+      const deliveryFee = parseInt(deliveryEl.value) || 0;
+      const deliveryLabel = deliveryEl.options[deliveryEl.selectedIndex].text;
+      const notes = document.getElementById('notes').value.trim();
+      const total = (price * qty) + deliveryFee;
+      const totalPackets = packetsPer * qty;
+      const msg = `🛒 *NEW ORDER — Hlogiey Noodles*\n\n👤 Name: ${name}\n📞 Phone: ${phone}\n📦 Pack: ${qty}× ${sizeLabel} (${totalPackets} packets total)\n🍜 Flavour: ${flavour}\n🚚 Delivery: ${deliveryLabel}${notes ? `\n📝 Notes: ${notes}` : ''}\n\n💰 *Total: R${total}*\n\nPlease confirm my order. Thank you!`;
+      alert("✅ Your order is ready! Redirecting to WhatsApp...");
+      window.open(`https://wa.me/27810389139?text=${encodeURIComponent(msg)}`, '_blank');
+      btn.innerHTML = originalText;
+      btn.disabled = false;
+      closeModal();
+    }, 500);
+  }
+
+  // ENHANCED FLAVOUR CLICK: auto-fill + open modal + set flavour
+  document.querySelectorAll('.flavour-card').forEach(card => {
+    card.addEventListener('click', function() {
+      const flavourName = this.querySelector('.flavour-name').innerText;
+      openModal();
+      const flavourSelect = document.getElementById('flavour');
+      // Try to match exact flavour name with select option
+      let found = false;
+      for(let i=0; i<flavourSelect.options.length; i++) {
+        if(flavourSelect.options[i].value === flavourName || flavourSelect.options[i].text.includes(flavourName)) {
+          flavourSelect.selectedIndex = i;
+          found = true;
+          break;
+        }
+      }
+      if(!found && flavourName === "Peri Peri Lamb") flavourSelect.value = "Peri Peri Lamb";
+      if(!found && flavourName === "Steak Chops") flavourSelect.value = "Steak Chops";
+      calcTotal();
+      this.style.transform = 'scale(.95)';
+      setTimeout(() => { if(this) this.style.transform = ''; }, 200);
+    });
+  });
+</script>
+</body>
+</html>
