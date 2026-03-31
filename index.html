@@ -6,6 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Hlogiey' — Delicious Noodles, Endless Flavours!</title>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a3d8f">
 <style>
   :root {
     --blue-deep: #0a3d8f;
@@ -443,6 +446,17 @@
   body.dark-mode .mobile-menu {
     background: #0a2a5a;
   }
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none; /* hide desktop menu */
+  }
+
+  .hamburger {
+    display: flex; /* show hamburger */
+  }
+}
+
 </style>
 </head>
 <body>
@@ -473,6 +487,17 @@
     <a href="#pricing" onclick="closeMenu()">💰 Pricing</a>
     <a href="#delivery" onclick="closeMenu()">🚚 Delivery</a>
     <a href="#order" class="mob-cta" onclick="closeMenu()">🛒 Order Now</a>
+    <button id="installBtn" style="
+  margin-top:20px;
+  padding:12px 24px;
+  border:none;
+  border-radius:50px;
+  background:#ffb74d;
+  font-weight:800;
+  cursor:pointer;
+  display:none;">
+  📲 Install App
+</button>
   </nav>
   <div class="hero-content">
     <h1 class="hero-title">HLOGIEY'</h1>
@@ -788,6 +813,35 @@
   window.toggleMenu = toggleMenu;
   window.closeMenu = closeMenu;
   window.sendOrder = sendOrder;
+
+
+  if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js")
+      .then(() => console.log("✅ Service Worker Registered"))
+      .catch(err => console.log("❌ SW Error:", err));
+  });
+}
+
+
+let deferredPrompt;
+const installBtn = document.getElementById("installBtn");
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installBtn.style.display = "inline-block";
+});
+
+installBtn.addEventListener("click", async () => {
+  installBtn.style.display = "none";
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+  console.log("User response:", outcome);
+  deferredPrompt = null;
+});
+
+
 </script>
 </body>
 </html>
